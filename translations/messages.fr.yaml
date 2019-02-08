@@ -1,0 +1,30 @@
+'Manage your account': 'Gèrez votre compte'
+Save: Enregistrer
+Create: Créer
+Delete: Supprimer
+Back: Retour
+Show: Voir
+Edit: Editer
+Actions: Opérations
+Id: Identifiant
+Email: Mail
+'First name': Prénom
+'Last name': Nom
+Password: 'Mot de passe'
+'Repeat Password': 'Retapez le mot de passe'
+Roles: Rôles
+'No records found': 'Aucun élément trouvé'
+'User index': 'Liste d''utilisateur'
+'Create new user': 'Créer un nouvel utilisateur'
+Account: Profil
+Admin: Administration
+Login: Connexion
+Logout: Déconnexion
+Home: Accueil
+'Sign in': Connexion
+'Sign up': 'Créer un compte'
+'Enter your credentials': 'Information de connexion'
+'Remember me': 'Se souvenir de moi'
+User: Utilisateur
+FirstName: Prénom
+LastName: Nom

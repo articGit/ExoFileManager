@@ -3,10 +3,43 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+	        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    	<nav class="navbar navbar-dark bg-dark">
+        	<a class="navbar-brand" href="{{ path('app_account') }}">{% trans %}Home{% endtrans %}</a>
+    		<ul class=".navbar-nav">
+				{% if is_granted('ROLE_USER') %}
+                    <li class="nav-item dropdown" style="margin-right: 75px;">
+                        <div class="dropdown">
+                          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% trans %}Actions{% endtrans %}
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{{ path('app_account') }}">{% trans %}Account{% endtrans %}</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            	<a class="dropdown-item" href="{{ path('app_admin') }}">{% trans %}Admin{% endtrans %}</a>
+                            {% endif %}
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">{% trans %}Logout{% endtrans %}</a>
+                          </div>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                    	<a href="{{ path('app_login') }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">{% trans %}Login{% endtrans %}</a>
+                    </li>
+                {% endif %}
+      		</ul>
+    	</nav>
+		<section class="">
+            {% block body %}{% endblock %}
+        </section>
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        {% endblock %}
     </body>
 </html>

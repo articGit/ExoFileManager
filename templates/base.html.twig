@@ -9,29 +9,32 @@
     </head>
     <body>
     	<nav class="navbar navbar-dark bg-dark">
+            {# For language change button, I want to stay on the same page, so I request the route name, current language and id parameter if exists #}
+            {% set currentRoute, params = app.request.attributes.all._route, {} %}
+            {% if app.request.locale == 'en' %}
+                {% set params = params|merge({'_locale': 'fr'}) %}
+            {% else %}
+                {% set params = params|merge({'_locale': 'en'}) %}
+            {% endif %}
+            {% if app.request.attributes.all.id is defined%}
+                {% set params = params|merge({'id': app.request.attributes.all.id}) %}
+            {% endif %}
+            <a class="nav-link btn btn-sm btn-danger" href="{{ path(currentRoute, params) }}">{{ params._locale|upper }}</a>
         	<a class="navbar-brand" href="{{ path('app_account') }}">{% trans %}Home{% endtrans %}</a>
-    		<ul class=".navbar-nav">
-				{% if is_granted('ROLE_USER') %}
-                    <li class="nav-item dropdown" style="margin-right: 75px;">
-                        <div class="dropdown">
-                          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {% trans %}Actions{% endtrans %}
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="{{ path('app_account') }}">{% trans %}Account{% endtrans %}</a>
-                            {% if is_granted('ROLE_ADMIN') %}
-                            	<a class="dropdown-item" href="{{ path('app_admin') }}">{% trans %}Admin{% endtrans %}</a>
-                            {% endif %}
-                            <a class="dropdown-item" href="{{ path('app_logout') }}">{% trans %}Logout{% endtrans %}</a>
-                          </div>
-                        </div>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                    	<a href="{{ path('app_login') }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">{% trans %}Login{% endtrans %}</a>
-                    </li>
-                {% endif %}
-      		</ul>
+			{% if is_granted('ROLE_USER') %}
+                <div class="dropdown">
+					<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans %}Actions{% endtrans %}</a>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    	<a class="dropdown-item" href="{{ path('app_account') }}">{% trans %}Account{% endtrans %}</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                    		<a class="dropdown-item" href="{{ path('app_admin') }}">{% trans %}Admin{% endtrans %}</a>
+                        {% endif %}
+                    	<a class="dropdown-item" href="{{ path('app_logout') }}">{% trans %}Logout{% endtrans %}</a>
+                  	</div>
+                </div>
+            {% else %}
+            	<a href="{{ path('app_login') }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">{% trans %}Login{% endtrans %}</a>
+            {% endif %}
     	</nav>
 		<section class="">
             {% block body %}{% endblock %}

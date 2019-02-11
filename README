@@ -1,0 +1,15 @@
+Requirements: 
+PHP 7.1 or upper, composer and MySQL
+
+composer install
+
+Modify your DATABASE_URL config in .env (Be sure to have a MySql instance running)
+
+Setting up the database:
+php bin/console doctrine:database:create
+php bin/console doctrine:migrations:make
+
+
+Running the app:
+php bin/console server:run &
+

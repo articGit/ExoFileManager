@@ -28,3 +28,25 @@ Home: Accueil
 User: Utilisateur
 FirstName: Prénom
 LastName: Nom
+'My Profile': 'Mon profil'
+'My Docs': 'Mes documents'
+'Shared Docs': 'Documents Partagés'
+'Manage Users': 'Gestion des utilisateurs'
+'Manage Docs': 'Gestion des documents'
+'Edit User': 'Modifier un utilisateur'
+'Create User': 'Créer un utilisateur'
+Hello: Bonjour
+'Hello Admin': 'Bonjour administrateur'
+'Be careful, you are now able to control users and documents...': 'Attention, vous pouvez maintenant gérer les utilisateurs et les documents'
+'New Doc': 'Nouveau document'
+'Create new Doc': 'Créer un nouveau document'
+'Doc index': 'Liste de documents'
+Filename: 'Nom de fichier'
+actions: Opérations
+Download: Télécharger
+'Edit Doc': 'Editer le document'
+Share: Partager
+Add: Ajouter
+Owner: Proprietaire
+'Who can access': 'Qui peut voir ce fichier'
+'If you can share this file with new people, they will be available above:': 'Si vous pouvez partager ce fichier avec des personnes, la liste apparaitra ci-dessous:'

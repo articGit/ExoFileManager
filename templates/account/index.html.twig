@@ -2,6 +2,8 @@
 
 {% block title %}Your account{% endblock %}
 
+{% block nav %}{% include 'navUser.html.twig' %}{% endblock %}
+
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
@@ -9,17 +11,8 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>{% trans %}Manage your account{% endtrans %} {{ app.user.firstName }}</h1>
-    <ul>
-        <li><a href="{{ path('user_show', {'id': app.user.id}) }}">Profile info</a></code></li>
-        <li><a href="{{ path('user_show', {'id': app.user.id}) }}">Your documents</a></code></li>
-    </ul>
-    {% if is_granted('ROLE_ADMIN') %}
-    	<h1>Administration</h1>
-        <ul>
-            <li><a href="{{ path('user_index') }}">Manage users</a></code></li>
-            <li><a href="{{ path('user_index') }}">Manage documents</a></code></li>
-        </ul>
-    {% endif %}
+    <h1>{% trans %}Hello{% endtrans %} {{ app.user.firstName }}</h1>
+    
+	Here you can access your files and others shared with you...
 </div>
 {% endblock %}

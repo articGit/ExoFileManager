@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Doc index{% endtrans %}{% endblock %}
+
+{% block nav %}{% include 'navAdmin.html.twig' %}{% endblock %}
+
+{% block body %}
+    <h1>Doc index</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <th>{% trans %}Filename{% endtrans %}</th>
+                <th>{% trans %}actions{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for doc in docs %}
+            <tr>
+                <td>{{ doc.id }}</td>
+                <td>{{ doc.filename }}</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" href="{{ path('doc_show', {'id': doc.id}) }}">{% trans %}Show{% endtrans %}</a>
+                    <a class="btn btn-sm btn-primary" href="{{ asset('uploads/files/' ~ doc.filename) }}">{% trans %}Download{% endtrans %}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">{% trans %}No records found{% endtrans %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-lg btn-primary" href="{{ path('doc_new') }}">{% trans %}Create{% endtrans %}</a>
+{% endblock %}

@@ -7,18 +7,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpFoundation\Request;
 
 class SecurityController extends AbstractController
 {
     /**
      * @Route("/{_locale}/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // some logic to determine the $locale
-        $locale = $request->getLocale();
-        $request->setLocale($locale);
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user

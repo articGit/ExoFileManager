@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New UserDoc{% endblock %}
+
+{% block body %}
+    <h1>Create new UserDoc</h1>
+
+    {{ include('user_doc/_form.html.twig') }}
+
+    <a href="{{ path('user_doc_index') }}">back to list</a>
+{% endblock %}

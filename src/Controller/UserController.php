@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Repository\DocRepository;
 
 /**
  * @Route("/{_locale}/user")
@@ -24,26 +25,27 @@ class UserController extends AbstractController
         $this->passwordEncoder = $passwordEncoder;
     }
     
-    /**
-     * @Route("/", name="user_index", methods={"GET"})
-     */
-    public function index(UserRepository $userRepository): Response
-    {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
+    
 
     /**
+     * @IsGranted("IS_AUTHENTICATED_ANONYMOUSLY")
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
         $user = new User();
-        // If current user is an admin, he give admin right to other profile
+        $isAdmin = false;
+        $targetRoute = 'app_login';
+        if($this->getUser() != null){
+            if(in_array('ROLE_ADMIN', $this->getUser()->getRoles())){
+                $isAdmin = true;
+                $targetRoute = 'user_index';
+            }
+        }
+        // If current user is an admin, he can give admin right to another profile
         $form = $this->createForm(UserType::class, $user, array(
-            'attr' => $this->getUser()->getRoles())
-            );
+            'attr' => ['isAdmin'=>$isAdmin] 
+            ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,7 +54,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute($targetRoute);
         }
         return $this->render('user/new.html.twig', [
             'user' => $user,
@@ -61,6 +63,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @Route("/{id}", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response
@@ -71,23 +74,30 @@ class UserController extends AbstractController
     }
 
     /**
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user): Response
     {
-        // If current user is an admin, he give admin right to other profile
+        $isAdmin = false;
+        $targetRoute = 'app_account';
+        if($this->getUser() != null){
+            if(in_array('ROLE_ADMIN', $this->getUser()->getRoles())){
+                $isAdmin = true;
+                $targetRoute = 'user_index';
+            }
+        }
+        // If current user is an admin, he can give admin right to another profile
         $form = $this->createForm(UserType::class, $user, array(
-            'attr' => $this->getUser()->getRoles())
-            );
+            'attr' => ['isAdmin'=>$isAdmin]
+        ));
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('user_index', [
-                'id' => $user->getId(),
-            ]);
+            return $this->redirectToRoute($targetRoute);
         }
 
         return $this->render('user/edit.html.twig', [
@@ -97,6 +107,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      * @Route("/{id}", name="user_delete", methods={"DELETE"})
      */
     public function delete(Request $request, User $user): Response
@@ -109,4 +120,15 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
+    
+//     /**
+//      * @IsGranted("ROLE_USER")
+//      * @Route("/{id}/doc/list", name="doc_list", methods={"GET"})
+//      */
+//     public function index(DocRepository $docRepository): Response
+//     {
+//         return $this->render('doc/index.html.twig', [
+//             'docs' => $docRepository->findBy(array('user')),
+//         ]);
+//     }
 }

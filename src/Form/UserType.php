@@ -17,9 +17,12 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $roles = $options['attr'];
+        $isAdmin = false;
+        if(array_key_exists('isAdmin', $options['attr'])){
+            $isAdmin = $options['attr']['isAdmin'];
+        }
         $choices = [];
-        if(in_array('ROLE_ADMIN', $roles)){
+        if($isAdmin){
             $choices = ['Admin' => 'ROLE_ADMIN'];
         }
         $builder

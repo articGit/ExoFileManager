@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New UserDoc{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}Who can access{% endtrans %} {{ doc.filename }} ?</h1>
+	<table class="table">
+        <thead>
+            <tr>
+                <th>{% trans %}User{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in sharedWith %}
+                <tr>
+                    <td>{{ item.email }}</td>
+                    <td>{{ include('user_doc/_delete_form.html.twig') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	<p>{% trans %}If you can share this file with new people, they will be available above:{% endtrans %}</p>
+    {{ include('user_doc/_form.html.twig') }}
+{% endblock %}

@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Administration{% endblock %}
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block nav %}
+    <a class="navbar-brand" href="{{ path('user_index') }}">{% trans %}Manage Users{% endtrans %}</a>
+    <a class="navbar-brand" href="{{ path('doc_index') }}">{% trans %}Manage Docs{% endtrans %}</a>
+{% endblock %}
 
 {% block body %}
 <style>
@@ -9,10 +14,8 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Administration page</h1>
-    <ul>
-        <li>Manage users</li>
-        <li>Manage docs</li>
-    </ul>
+    <h1>{% trans %}Hello Admin{% endtrans %}</h1>
+
+    {% trans %}Be careful, you are now able to control users and documents...{% endtrans %}
 </div>
 {% endblock %}

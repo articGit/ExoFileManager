@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserDoc{% endblock %}
+
+{% block body %}
+    <h1>UserDoc</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user_doc.id }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>{{ user_doc.user }}</td>
+            </tr>
+            <tr>
+                <th>Doc</th>
+                <td>{{ user_doc.doc }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_doc_index') }}">back to list</a>
+
+    <a href="{{ path('user_doc_edit', {'id': user_doc.id}) }}">edit</a>
+
+    {{ include('user_doc/_delete_form.html.twig') }}
+{% endblock %}

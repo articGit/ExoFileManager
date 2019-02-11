@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Doc{% endblock %}
+
+{% block nav %}{% include 'navUser.html.twig' %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}Edit Doc{% endtrans %}</h1>
+    {{ include('doc/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('doc/_delete_form.html.twig') }}
+{% endblock %}

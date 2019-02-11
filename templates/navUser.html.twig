@@ -1,0 +1,5 @@
+{% block nav %}
+    <a class="navbar-brand" href="{{ path('user_show', {'id': app.user.id}) }}">{% trans %}My Profile{% endtrans %}</a>
+    <a class="navbar-brand" href="{{ path('doc_list') }}">{% trans %}My Docs{% endtrans %}</a>
+    <a class="navbar-brand" href="{{ path('doc_shared') }}">{% trans %}Shared Docs{% endtrans %}</a>
+{% endblock %}

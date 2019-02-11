@@ -2,16 +2,17 @@
 
 {% block title %}User index{% endblock %}
 
+{% block nav %}{% include 'navAdmin.html.twig' %}{% endblock %}
+
+
 {% block body %}
     <h1>{% trans %}User index{% endtrans %}</h1>
-
     <table class="table">
         <thead>
             <tr>
                 <th>{% trans %}Id{% endtrans %}</th>
                 <th>{% trans %}Email{% endtrans %}</th>
                 <th>{% trans %}Roles{% endtrans %}</th>
-                <th>{% trans %}Password{% endtrans %}</th>
                 <th>{% trans %}First name{% endtrans %}</th>
                 <th>{% trans %}Last name{% endtrans %}</th>
                 <th>{% trans %}Actions{% endtrans %}</th>
@@ -23,7 +24,6 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>
                 <td>
@@ -38,6 +38,5 @@
         {% endfor %}
         </tbody>
     </table>
-
     <a class="btn btn-lg btn-primary" href="{{ path('user_new') }}">{% trans %}Create{% endtrans %}</a>
 {% endblock %}

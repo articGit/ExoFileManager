@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {% if form.users is defined %}
+    	<div class="form-group">
+            {{ form_label(form.users) }}
+            {{ form_errors(form.users) }}
+            {{ form_widget(form.users, {'attr': {'class': 'form-control'}}) }}
+            {{ form_help(form.users) }}
+    	</div>
+	{% endif %}
+	<button class="btn btn-lg btn-primary">{% trans %}Save{% endtrans %}</button>
+{{ form_end(form) }}

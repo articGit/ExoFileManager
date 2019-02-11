@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit UserDoc{% endblock %}
+
+{% block body %}
+    <h1>Edit UserDoc</h1>
+
+    {{ include('user_doc/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('user_doc_index') }}">back to list</a>
+
+    {{ include('user_doc/_delete_form.html.twig') }}
+{% endblock %}

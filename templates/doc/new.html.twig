@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}New Doc{% endtrans %}{% endblock %}
+
+{% block nav %}{% include 'navUser.html.twig' %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}Create new Doc{% endtrans %}</h1>
+    {{ include('doc/_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Create User{% endtrans %}{% endblock %}
+
+{% block nav %}
+    <a class="navbar-brand" href="{{ path('user_index') }}">{% trans %}Manage Users{% endtrans %}</a>
+    <a class="navbar-brand" href="{{ path('doc_index') }}">{% trans %}Manage Docs{% endtrans %}</a>
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}Create new user{% endtrans %}</h1>
+    {{ include('user/_form.html.twig') }}
+{% endblock %}

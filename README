@@ -8,7 +8,7 @@ Modify your DATABASE_URL config in .env (Be sure to have a MySql instance runnin
 Setup the database:
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:make
-
+php bin/console doctrine:fixtures:load
 
 Running the app:
 php bin/console server:run &
